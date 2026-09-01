@@ -21,7 +21,7 @@ hl.config({
     general = { layout = vars.layout },
     dwindle = { preserve_split = true },
     master = { new_status = "master" },
-    scroling = { fullscreen_on_one_column = true }
+    scrolling = { fullscreen_on_one_column = true }
 })
 
 -- ─── Window Rules ────────────────────────────────────────────────────────────────────────────────
