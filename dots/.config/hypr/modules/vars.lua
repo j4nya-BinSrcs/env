@@ -7,49 +7,60 @@
 -- │╚══════╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   │
 -- │                                            Janya's RICE                                       │
 -- ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
--- Configurations for the Devices and Monitors.
--- Documentation: https://wiki.hypr.land/configuring/core/devices/
+-- Declaration of Programs, Services and Options as variables to be used by Hyprland.
+-- Documentation: https://wiki.hypr.land/configuring/naming-conventions/
 -- ─────────────────────────────────────────────────────────────────────────────────────────────────
 
 
--- import the vars module.
-local vars = require("modules.vars")
+-- initialize a table to store all the variables.
+local vars = {}
 
--- ─── Monitors ────────────────────────────────────────────────────────────────────────────────────
--- Default monitor configuration. Add more monitors if needed.
-hl.monitor({
-    output   = vars.monitors.primary,
-    mode     = "preferred",
-    position = "auto",
-    scale    = vars.monitors.scale,
-    transform = vars.monitors.transform
-})
+-- ─── Devices ─────────────────────────────────────────────────────────────────────────────────────
+vars.monitors = {
+    primary = "eDP-1",
+    secondary = "HDMI-A-1",
+    scale = 1.00,
+    transform = 0,
+}
 
--- ─── Input ───────────────────────────────────────────────────────────────────────────────────────
--- Default Keyboard configuration.
-hl.config({
-    input = {
-        kb_layout  = vars.input.layout,
-        kb_variant = "",
-        kb_model   = "",
-        kb_options = "",
-        kb_rules   = "",
+vars.input = {
+    layout = "us",
+    follow_mouse = 1,
+    sensitivty = 0,
+    natural_scroll = true
+}
 
-        follow_mouse = vars.input.follow_mouse,
+-- ─── Visuals ─────────────────────────────────────────────────────────────────────────────────────
+vars.gaps = {}
+vars.borders = {}
+vars.layout = [[Dwindle]]
+vars.colors = {
 
-        sensitivity = vars.input.sensitivty, -- -1.0 - 1.0, 0 means no modification.
+}
 
-        touchpad = {
-            natural_scroll = vars.input.natural_scroll,
-        },
-    },
-})
+-- ─── Keys ────────────────────────────────────────────────────────────────────────────────────────
+vars.keys = { mod = "SUPER"}
 
--- ─── Other Devices ───────────────────────────────────────────────────────────────────────────────
--- Example device configuration.
--- hl.device({
---     name        = "epic-mouse-v1",
---     sensitivity = -0.5,
--- })
+-- ─── Commands ────────────────────────────────────────────────────────────────────────────────────
+-- commands including programs and services.
+vars.commands = {
+    terminal = "ghostty",
+    explorer = "nautilus",
+    menu = "rofi -show run",
+    browser = "zen-browser",
+    editor = "zeditor"
+}
+
+-- ─── Scripts ─────────────────────────────────────────────────────────────────────────────────────
+vars.scripts = {
+
+}
+
+-- ─── Paths ───────────────────────────────────────────────────────────────────────────────────────
+vars.paths = {
+
+}
+
+return vars
 
 -- ─────────────────────────────────────────────────────────────────────────────────────────────────

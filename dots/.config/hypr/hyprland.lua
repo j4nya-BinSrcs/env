@@ -21,9 +21,6 @@ require("modules.core.perms")
 -- module mentioning the input devices to the system.
 require("modules.core.devices")
 
---module defining all the prorgams and services aliases.
-require("modules.settings.programs")
-
 -- module designing the layouts, window & workspaces rules, etc.
 require("modules.settings.layouts")
 
@@ -35,3 +32,5 @@ require("modules.settings.binds")
 
 -- module mentioning programs and services to autostart on boot.
 require("modules.settings.startup")
+
+-- ─────────────────────────────────────────────────────────────────────────────────────────────────
