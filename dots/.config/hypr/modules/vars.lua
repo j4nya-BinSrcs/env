@@ -31,11 +31,27 @@ vars.input = {
 }
 
 -- ─── Visuals ─────────────────────────────────────────────────────────────────────────────────────
-vars.gaps = {}
-vars.borders = {}
+-- https://wiki.hypr.land/Configuring/Basics/Variables/
 vars.layout = [[Dwindle]]
-vars.colors = {
-
+vars.ui = {
+    gaps = { inner = 4, outer = 12 },
+    border = {
+        size = 2,
+        color = { active = "#232323aa", inactive = "#595959aa" },
+        rounding = 15,
+        rounding_power = 7,
+    },
+    opacity = { active = 0.95, inactive = 0.86 },
+    shadow = {
+        range = 82,
+        render_power = 15,
+        color = "0xee1a1a1a",
+    },
+    blur = {
+       size = 12,
+       passes = 3,
+       vibrancy = 0.1696
+   }
 }
 
 -- ─── Keys ────────────────────────────────────────────────────────────────────────────────────────
@@ -46,19 +62,23 @@ vars.keys = { mod = "SUPER"}
 vars.commands = {
     terminal = "ghostty",
     explorer = "nautilus",
-    menu = "rofi -show run",
+    laucher = "rofi -show run",
     browser = "zen-browser",
-    editor = "zeditor"
+    editor = "zeditor",
+    wallpaper_engine = "awww-daemon",
+    shell = "qs",
+
+    logout = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
 }
 
 -- ─── Scripts ─────────────────────────────────────────────────────────────────────────────────────
 vars.scripts = {
-
+-- To Be Added
 }
 
 -- ─── Paths ───────────────────────────────────────────────────────────────────────────────────────
 vars.paths = {
-
+-- To Be Added
 }
 
 return vars
