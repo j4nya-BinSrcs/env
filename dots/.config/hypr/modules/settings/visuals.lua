@@ -13,7 +13,7 @@
 
 
 -- import the vars modules for UI variables.
-local vars = require("vars")
+local vars = require("modules.vars")
 
 -- ─── Look & Feel ─────────────────────────────────────────────────────────────────────────────────
 hl.config({
