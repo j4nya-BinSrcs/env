@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 
 import "../commons"
+import "../core"
 
 // The HostPill: a single, self-contained floating capsule that is the center
 // of the shell. Everything renders inside this pill and morphs based on
@@ -18,7 +19,7 @@ PanelWindow {
     anchors { top: true; left: true; right: true }
     exclusiveZone: 0
     aboveWindows: true
-    implicitHeight: Theme.pillHeight + Theme.pillTop * 2
+    implicitHeight: ShellRouter.heightFor(ShellState.mode) + Theme.pillTop * 2
     color: "transparent"
 
 
@@ -34,7 +35,9 @@ PanelWindow {
         // The capsule width is driven by the current body's desired width plus
         // horizontal padding, so it grows/shrinks as the content morphs.
         width: (capsuleBody.item ? capsuleBody.item.implicitWidth : 0) + Theme.pillPaddingX * 2
-        height: Theme.pillHeight
+        // The height is routed per mode by ShellRouter (a slim pill or a taller
+        // panel depending on the active content).
+        height: ShellRouter.heightFor(ShellState.mode)
 
         radius: Theme.pillRadius
         color: mouse.containsMouse ? Theme.surface : Theme.bg
@@ -64,7 +67,7 @@ PanelWindow {
         Loader {
           id: capsuleBody
           anchors.centerIn: parent
-          source: "ClockWidget.qml" // -> ShellRouter-driven mode switch in future.
+          source: ShellRouter.sourceFor(ShellState.mode)
         }
     }
 

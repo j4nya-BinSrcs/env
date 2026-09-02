@@ -1,3 +1,4 @@
 module core
 singleton ShellState 1.0 ShellState.qml
 singleton ShellSettings 1.0 ShellSettings.qml
+singleton ShellRouter 1.0 ShellRouter.qml
