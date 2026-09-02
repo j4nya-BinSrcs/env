@@ -10,6 +10,11 @@ import "../commons"
 PanelWindow {
     id: root
 
+    // Set by the Variants in shell.qml to this pill's screen info
+    // (QuickshellScreenInfo). Consumed for per-monitor data; the window
+    // placement itself is handled by Variants via the `screen` context.
+    property var modelData
+
     anchors { top: true; left: true; right: true }
     exclusiveZone: 0
     aboveWindows: true
