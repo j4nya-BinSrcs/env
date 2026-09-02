@@ -2,6 +2,7 @@ pragma Singleton
 import Quickshell
 import QtQuick
 
+import "../core"
 
 // Service registry / lifecycle owner.
 //
@@ -16,6 +17,11 @@ import QtQuick
 // touch Quickshell service objects directly.
 Singleton {
   id: root
+
+  // Shell-level configuration (12/24h clock, later theme/behavior). Cross-
+  // cutting, so it lives in core but is routed through here for a single
+  // consumption surface.
+  readonly property var settings: ShellSettings
 
   // Convenience accessors. Services are also reachable by bare name from any
   // file that imports the `services` module, but exposing them here keeps the

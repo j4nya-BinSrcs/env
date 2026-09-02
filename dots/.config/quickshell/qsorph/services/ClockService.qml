@@ -12,5 +12,5 @@ Singleton {
   }
 
   // Read-only textual representation of the current time.
-  readonly property var timeString: Qt.formatDateTime(clock.date, "hh:mm AP")
+  readonly property var timeString: Qt.formatDateTime(clock.date, ServiceManager.settings.clockFormat)
 }
