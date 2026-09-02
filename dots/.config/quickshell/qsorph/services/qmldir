@@ -1,0 +1,3 @@
+module services
+singleton ServiceManager 1.0 ServiceManager.qml
+singleton ClockService 1.0 ClockService.qml
