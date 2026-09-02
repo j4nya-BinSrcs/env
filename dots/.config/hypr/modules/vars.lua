@@ -26,7 +26,7 @@ vars.monitors = {
 vars.input = {
     layout = "us",
     follow_mouse = 1,
-    sensitivty = 0,
+    sensitivity = 0,
     natural_scroll = true
 }
 

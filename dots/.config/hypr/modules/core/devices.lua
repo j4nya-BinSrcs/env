@@ -37,7 +37,7 @@ hl.config({
 
         follow_mouse = vars.input.follow_mouse,
 
-        sensitivity = vars.input.sensitivty, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity = vars.input.sensitivity, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
             natural_scroll = vars.input.natural_scroll,
