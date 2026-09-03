@@ -56,6 +56,23 @@ hl.bind(mod .. "+S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mod .. "+SHIFT+S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Multimedia keys.
+-- Play / Pause media (Locked so it works on lockscreen)
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+
+-- Next / Previous track
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+-- Volume control (Repeating so holding down continues changing volume, Locked for lockscreen)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true, locked = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true, locked = true })
+
+-- Mute audio
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+
+-- Brightness control (Repeating for smooth transitions, Locked for lockscreen support)
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"), { repeating = true, locked = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { repeating = true, locked = true })
 
 
 -- ─── Mouse Actions ───────────────────────────────────────────────────────────────────────────────
