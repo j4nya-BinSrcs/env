@@ -19,7 +19,7 @@ PanelWindow {
     anchors { top: true; left: true; right: true }
     exclusiveZone: 0
     aboveWindows: true
-    implicitHeight: ShellRouter.heightFor(ShellState.mode) + Theme.pillTop * 2
+    implicitHeight: ShellRouter.heightFor(ShellState.state) + Theme.pillTop * 2
     color: "transparent"
 
 
@@ -37,7 +37,7 @@ PanelWindow {
         width: (capsuleBody.item ? capsuleBody.item.implicitWidth : 0) + Theme.pillPaddingX * 2
         // The height is routed per mode by ShellRouter (a slim pill or a taller
         // panel depending on the active content).
-        height: ShellRouter.heightFor(ShellState.mode)
+        height: ShellRouter.heightFor(ShellState.state)
 
         radius: Theme.pillRadius
         color: mouse.containsMouse ? Theme.surface : Theme.bg
@@ -67,7 +67,7 @@ PanelWindow {
         Loader {
           id: capsuleBody
           anchors.centerIn: parent
-          source: ShellRouter.sourceFor(ShellState.mode)
+          source: ShellRouter.sourceFor(ShellState.state)
         }
     }
 
@@ -76,6 +76,7 @@ PanelWindow {
       id: mouse
       anchors.fill: capsule
       hoverEnabled: true
-      cursorShape: Qt.PointingHandCursor
+      onContainsMouseChanged:
+        ShellState.state = mouse.containsMouse ? ShellState.stateExpanded : ShellState.stateIdle
     }
 }

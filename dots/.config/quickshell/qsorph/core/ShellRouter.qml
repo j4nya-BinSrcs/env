@@ -3,57 +3,42 @@ import Quickshell
 import QtQuick
 import "../commons"
 
-// ShellRouter: owns HOW a ShellState.mode maps to rendered content, and the
-// navigation between modes.
-
+// ShellRouter: owns HOW a ShellState.state maps to rendered content and
+// dimensions, plus the navigation between states.
+//
 // Division of responsibility:
-//   - ShellState holds the *current* mode (the mutable source of truth).
-//   - ShellRouter owns the *route table* (mode -> body file + height) and the
-//     navigation API (show/hide/toggle). The HostPill asks ShellRouter "what
-//     body and height for the current mode?" and never hardcodes a body.
-
-// This keeps the pill decoupled from specific panels.
+//   - ShellState holds the *current* state (the mutable source of truth,
+//     one of the identifiers below).
+//   - ShellRouter owns the *route table* (state -> body file + height) and the
+//     navigation API (show/hide/enter). The HostPill asks ShellRouter "what
+//     body and height for the current state?" and never hardcodes a body.
+//
+// Predefined states (rather than ad-hoc mode names) keep the morph space
+// bounded, so each surface — hover expansion, OSDs, panels — has one clear slot:
+//   idle      collapsed clock pill (base/home)
+//   expanded  taller pill on hover: time + date/day
+//   osd       transient on-screen displays (volume/brightness/notifs, future)
+//   panel     full control- + notification-center (future)
 Singleton {
   id: root
 
-  // ---- Mode identifiers ----------------------------------------------------
-  readonly property string modeClock: "clock"
-  readonly property string modeControl: "control"  // future: control center
-  readonly property string modeNotify: "notify"    // future: notifications
+  function sourceFor(state) {
+    return "ClockWidget.qml"
+  }
 
-  // The collapsed/idle mode the pill settles into.
-  readonly property string defaultMode: modeClock
-
-  // ---- Route table (mode -> body + dimensions) -----------------------------
-  // Body files are resolved by the HostPill's Loader relative to the widgets
-  // directory, so we return plain filenames. Heights are explicit per mode so
-  // the capsule can grow from a slim pill into a taller panel.
-  function sourceFor(mode) {
-    switch (mode) {
-    case modeControl: return "ClockWidget.qml" // placeholder until real panels
-    case modeNotify:  return "ClockWidget.qml" // placeholder
-    default:          return "ClockWidget.qml"
+  function heightFor(state) {
+    switch (state) {
+    case ShellState.stateExpanded: return ShellState.expandedHeight
+    default:                       return ShellState.idleHeight
     }
   }
 
-  function heightFor(mode) {
-    return Theme.pillHeight
-  }
-
   // ---- Navigation ----------------------------------------------------------
-  // Switch to a mode; no-op if already active.
-  function show(mode) {
-    ShellState.mode = mode
+  function show(state) {
+    ShellState.state = state
   }
 
-  // Return to the idle/collapsed mode.
   function hide() {
-    ShellState.mode = defaultMode
-  }
-
-  // Collapsed => expanded / expanded => collapsed. v0.4 has a single real
-  // mode, so this bounces between the idle pill and the (future) control mode.
-  function toggle() {
-    ShellState.mode = ShellState.mode === defaultMode ? modeControl : defaultMode
+    ShellState.state = ShellState.defaultState
   }
 }

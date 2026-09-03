@@ -50,6 +50,9 @@ Singleton {
     readonly property int animFast: 120
     readonly property int animMed: 200
     readonly property int animSlow: 300
+    // Slow, subtle glide for the pill expanding/shrinking on hover. Longer than
+    // the others so the morph reads as a calm drift rather than a snap.
+    readonly property int animGlide: 420
     // Easing used by animations. Stored as a string enum name: Quickshell
     readonly property string easing: "OutCubic"
 

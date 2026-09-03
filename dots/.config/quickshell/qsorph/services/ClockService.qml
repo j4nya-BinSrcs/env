@@ -13,4 +13,7 @@ Singleton {
 
   // Read-only textual representation of the current time.
   readonly property var timeString: Qt.formatDateTime(clock.date, ServiceManager.settings.clockFormat)
+
+  // Short date + day, used by the expanded clock body ("Thu, Sep 3").
+  readonly property var dateString: Qt.formatDateTime(clock.date, "ddd, MMM d")
 }
